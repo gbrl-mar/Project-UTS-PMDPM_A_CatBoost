@@ -3,8 +3,7 @@ import pickle
 import os
 
 def load_model(model_file):
-    model_path = os.path.join(os.getcwd(), model_file)
-    with open(model_path, 'rb') as f:
+    with open(model_file, 'rb') as f:
         return pickle.load(f)
 
 def kelas_app():
@@ -40,7 +39,7 @@ def kelas_app():
                    numprevowners, made, input_isnewbuilt, input_hasstormprotector, basement, attic, garage,
                    input_hasstorageroom, hasguestroom]]
 
-    st.write("Data yang akan diinput ke model:")
+    st.write("Data yang akan diinput ke model")
     st.write(input_data)
 
     if st.button("Prediksi"):
