@@ -3,8 +3,7 @@ import pickle
 import os
 
 def load_model(model_file):
-    model_directory = r'D:\Kuliah UAJY\Semester 5\Pembelajaran Mesin\Project UTS PMDPM_A_CatBoost'
-    model_path = os.path.join(model_directory, model_file)
+    model_path = os.path.join(os.getcwd(), model_file)
     with open(model_path, 'rb') as f:
         return pickle.load(f)
 
@@ -25,11 +24,11 @@ def kelas_app():
     made = st.number_input("Tahun Dibuat", min_value=1900, max_value=2024)
     isnewbuilt = st.selectbox("Apakah Baru Dibangun?", ["yes", "no"])
     hasstormprotector = st.selectbox("Apakah Ada Pelindung Badai?", ["yes", "no"])
-    basement = st.number_input("luas Basement?")
-    attic = st.number_input("attic? M2")
-    garage = st.number_input("Luas Garasi?")
+    basement = st.number_input("Luas Basement (m2)", min_value=0)
+    attic = st.number_input("Luas Attic (m2)", min_value=0)
+    garage = st.number_input("Luas Garasi (m2)", min_value=0)
     hasstorageroom = st.selectbox("Apakah Ada Ruang Penyimpanan?", ["yes", "no"])
-    hasguestroom = st.number_input("Berapa Kamar Tamu?")
+    hasguestroom = st.number_input("Berapa Kamar Tamu?", min_value=0)
 
     input_hasyard = 1 if hasyard == "yes" else 0
     input_haspool = 1 if haspool == "yes" else 0
@@ -41,7 +40,7 @@ def kelas_app():
                    numprevowners, made, input_isnewbuilt, input_hasstormprotector, basement, attic, garage,
                    input_hasstorageroom, hasguestroom]]
 
-    st.write("Data yang akan diinput ke model")
+    st.write("Data yang akan diinput ke model:")
     st.write(input_data)
 
     if st.button("Prediksi"):
